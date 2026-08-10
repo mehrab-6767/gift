@@ -1,0 +1,16 @@
+:root {
+  --background: #F7F3EC;
+  --paper: #FFFDF8;
+  --burgundy: #6A2135;
+  --gold: #B58A2B;
+  --text: #2D2A26;
+
+  --shadow-soft: 0 12px 30px rgba(0,0,0,.08);
+  --shadow-paper: 0 18px 45px rgba(0,0,0,.12);
+
+  --radius-large: 24px;
+
+  --transition-slow: 700ms;
+  --transition-medium: 450ms;
+  --transition-fast: 250ms;
+}
