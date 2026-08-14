@@ -8,7 +8,7 @@ function StageBackground({ children }) {
         items-center
         justify-center
         overflow-hidden
-        bg-[#F7F3EC]
+        bg-[#FAFAFA]
       "
     >
       {/* Room Ambient Light */}
@@ -16,7 +16,7 @@ function StageBackground({ children }) {
         className="
           absolute
           inset-0
-          bg-[radial-gradient(circle_at_30%_20%,rgba(255,245,220,.8),transparent_55%)]
+          bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.9),transparent_55%)]
         "
       />
 

@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import AppBackground from "./components/layout/AppBackground";
 import SceneManager from "./components/layout/SceneManager";
 import { useAppFlow } from "./context/AppFlowContext";
 import { FLOW } from "./config/flow";
+import LoadingScreen from "./components/LoadingScreen";
 
 const DEV_STAGE_OPTIONS = [
   { label: "Welcome", value: FLOW.WELCOME },
@@ -15,6 +17,7 @@ const DEV_STAGE_OPTIONS = [
   { label: "Future", value: FLOW.FUTURE },
   { label: "Voice Message", value: FLOW.VOICE_MESSAGE },
   { label: "Ending", value: FLOW.ENDING },
+  { label: "Thank You", value: FLOW.THANK_YOU },
 ];
 
 function DevStageSwitcher() {
@@ -55,11 +58,106 @@ function DevStageSwitcher() {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    let minTimeElapsed = false;
+    let assetsLoaded = false;
+
+    const checkReady = () => {
+      if (minTimeElapsed && assetsLoaded && mounted) {
+        setIsReady(true);
+        setProgress(100);
+      }
+    };
+
+    // Minimum 2-second display timer
+    const minTimer = setTimeout(() => {
+      minTimeElapsed = true;
+      checkReady();
+    }, 2000);
+
+    // Preload all actual assets
+    const loadAssets = async () => {
+      // 1. Wait for fonts
+      try {
+        await document.fonts.ready;
+      } catch (e) {
+        // Continue even if fonts API fails
+      }
+      if (mounted) setProgress(15);
+
+      // 2. Preload all known images (gifts + memories)
+      const imageUrls = [
+        "/gifts/flowers.png",
+        "/gifts/lipgloss.png",
+        "/gifts/plushie.png",
+        "/gifts/churi.png",
+        "/gifts/jhumkas.png",
+        "/gifts/ring.png",
+        ...Array.from({ length: 14 }, (_, i) =>
+          `/memories/${String(i + 1).padStart(2, "0")}.jpg`
+        ),
+      ];
+
+      let loaded = 0;
+      const total = imageUrls.length;
+
+      const loadImage = (src) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false); // Don't block on failures
+          img.src = src;
+        });
+
+      await Promise.all(
+        imageUrls.map(async (url) => {
+          await loadImage(url);
+          loaded++;
+          if (mounted) {
+            // Scale progress: 15% (fonts) + 85% (images)
+            setProgress(Math.round(15 + (loaded / total) * 85));
+          }
+        })
+      );
+
+      assetsLoaded = true;
+      checkReady();
+    };
+
+    loadAssets();
+
+    return () => {
+      mounted = false;
+      clearTimeout(minTimer);
+    };
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setLoading(false);
+  };
+
   return (
     <>
-      <AppBackground />
-      <SceneManager />
-      <DevStageSwitcher />
+      {loading && (
+        <LoadingScreen 
+          progress={progress} 
+          isReady={isReady} 
+          onComplete={handleLoadingComplete} 
+        />
+      )}
+      
+      {!loading && (
+        <>
+          <AppBackground />
+          <SceneManager />
+          <DevStageSwitcher />
+        </>
+      )}
     </>
   );
 }

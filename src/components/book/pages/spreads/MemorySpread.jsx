@@ -18,7 +18,7 @@ function MemorySpread({ memory }) {
           </div>
 
           {/* Archival framed photograph */}
-          <div className="relative max-h-[78%] w-auto max-w-[85%] rounded-md bg-[#FFFDF8] p-3 shadow-[0_12px_30px_rgba(0,0,0,0.12)] border border-[#E8DCC7]">
+          <div className="relative max-h-[78%] w-auto max-w-[85%] rounded-md bg-[#FFFFFF] p-3 shadow-[0_12px_30px_rgba(0,0,0,0.12)] border border-[#E8DCC7]">
             <div className="relative overflow-hidden rounded">
               <img
                 src={memory.photo}

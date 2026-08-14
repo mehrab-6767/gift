@@ -27,7 +27,7 @@ export default function GiftRevealModal({ gift, onClose }) {
           exit={{ scale: 0.85, y: 20, opacity: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-lg rounded-2xl bg-[#FFFDF8] p-8 sm:p-10 border border-[#D4AF37]/50 shadow-[0_30px_90px_rgba(0,0,0,0.5)] text-center space-y-6 overflow-hidden"
+          className="relative w-full max-w-lg rounded-2xl bg-[#FFFFFF] p-8 sm:p-10 border border-[#D4AF37]/50 shadow-[0_30px_90px_rgba(0,0,0,0.5)] text-center space-y-6 overflow-hidden"
         >
           {/* Subtle Paper Texture */}
           <div
@@ -68,7 +68,7 @@ export default function GiftRevealModal({ gift, onClose }) {
             {/* Elegant Luxury Placeholder Text Card (Displays when image is loading / placeholder) */}
             {imgError && (
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="h-12 w-12 rounded-full border border-[#B58A2B]/40 bg-[#FFFDF8] flex items-center justify-center text-[#6A2135] text-xl font-serif shadow-sm">
+                <div className="h-12 w-12 rounded-full border border-[#B58A2B]/40 bg-[#FFFFFF] flex items-center justify-center text-[#6A2135] text-xl font-serif shadow-sm">
                   ✦
                 </div>
                 <p className="font-serif text-lg font-normal text-[#6A2135] tracking-wide">

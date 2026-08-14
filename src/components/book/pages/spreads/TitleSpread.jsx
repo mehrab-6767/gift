@@ -11,7 +11,7 @@ function TitleSpread() {
       leftContent={
         <div className="relative flex h-full flex-col items-center justify-center px-10 text-center select-none">
           {/* Handcrafted botanical ring emblem */}
-          <div className="relative flex h-36 w-36 items-center justify-center rounded-full border border-[#B58A2B]/30 bg-[#FFFDF8]/50 shadow-[0_8px_20px_rgba(181,138,43,0.06)]">
+          <div className="relative flex h-36 w-36 items-center justify-center rounded-full border border-[#B58A2B]/30 bg-[#FFFFFF]/50 shadow-[0_8px_20px_rgba(181,138,43,0.06)]">
             <span className="text-3xl text-[#B58A2B]">❀</span>
             <div className="absolute inset-2 rounded-full border border-dashed border-[#B58A2B]/20" />
           </div>

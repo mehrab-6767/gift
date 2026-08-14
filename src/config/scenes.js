@@ -9,6 +9,7 @@ import Forgiveness from "../sections/Forgiveness/Forgiveness";
 import Letter from "../sections/Letter/Letter";
 import Future from "../sections/Future/Future";
 import VoiceMessageScene from "../sections/VoiceMessage/VoiceMessageScene";
+import ThankYou from "../sections/ThankYou/ThankYou";
 import Ending from "../sections/Ending/Ending";
 
 import { FLOW } from "./flow";
@@ -33,6 +34,8 @@ export const SCENES = {
   [FLOW.FUTURE]: Future,
 
   [FLOW.VOICE_MESSAGE]: VoiceMessageScene,
+
+  [FLOW.THANK_YOU]: ThankYou,
 
   [FLOW.ENDING]: Ending,
 };

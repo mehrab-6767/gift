@@ -15,7 +15,7 @@ import { memories } from "../../data/memories";
 const GOLD    = "#B58A2B";
 const BURG    = "#6A2135";
 const TEXT    = "#2D2A26";
-const PAPER   = "#FFFDF8";
+const PAPER   = "#FFFFFF";
 const FAINT   = "rgba(181,138,43,0.20)";
 
 /* ─── Title spread (spread 0) ───────────────────────────────────────────── */

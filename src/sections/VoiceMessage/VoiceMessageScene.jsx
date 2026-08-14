@@ -37,10 +37,10 @@ export default function VoiceMessageScene() {
     setTimeout(() => setShowContinue(true), 2000);
   }, []);
 
-  /* Transition to Ending */
+  /* Transition to Thank You */
   function handleContinue() {
     setTransitioning(true);
-    setTimeout(() => goTo(FLOW.ENDING), 1600);
+    setTimeout(() => goTo(FLOW.THANK_YOU), 1600);
   }
 
   return (

@@ -122,7 +122,7 @@ export default function Forgiveness() {
         {/* Journal Page Card */}
         <div
           className="relative w-full min-h-[380px] rounded-2xl p-8 sm:p-12 shadow-[0_25px_70px_rgba(0,0,0,0.7)] border border-[#B58A2B]/20 flex flex-col justify-between overflow-hidden"
-          style={{ background: "linear-gradient(165deg, #FFFDF8 0%, #F5EFE6 100%)" }}
+          style={{ background: "linear-gradient(165deg, #FFFFFF 0%, #F5F5F5 100%)" }}
         >
           {/* Paper Texture */}
           <div

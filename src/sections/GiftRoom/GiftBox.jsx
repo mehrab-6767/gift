@@ -34,6 +34,7 @@ export default function GiftBox({ gift, index, isOpened, onOpen }) {
             ? { y: 0 }
             : {
                 y: [0, -8, 0],
+                scale: [1, 1.008, 1],
               }
         }
         transition={

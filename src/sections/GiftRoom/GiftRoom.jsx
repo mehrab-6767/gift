@@ -72,7 +72,7 @@ export default function GiftRoom() {
   }, [goTo]);
 
   return (
-    <main className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#F7F3EC] px-4 py-12 select-none">
+    <main className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#FAFAFA] px-4 py-12 select-none">
 
       {/* ── Room Ambience Layer ── */}
       <RoomAmbience />
@@ -224,7 +224,7 @@ export default function GiftRoom() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
-            className="fixed inset-0 z-50 pointer-events-none bg-[#F7F3EC]"
+            className="fixed inset-0 z-50 pointer-events-none bg-[#FAFAFA]"
           />
         )}
       </motion.div>
@@ -245,7 +245,7 @@ function RoomAmbience() {
       <div
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
-          background: "linear-gradient(180deg, rgba(247,243,236,0.2) 0%, rgba(228,210,180,0.4) 60%, rgba(195,165,130,0.6) 100%)",
+          background: "linear-gradient(180deg, rgba(250,250,250,0.2) 0%, rgba(240,240,240,0.4) 60%, rgba(210,210,210,0.5) 100%)",
         }}
       />
 
@@ -263,7 +263,7 @@ function RoomAmbience() {
       <div
         className="pointer-events-none absolute -top-40 -right-40 h-[700px] w-[700px] rotate-45 opacity-35 blur-3xl"
         style={{
-          background: "linear-gradient(135deg, rgba(255,248,220,1) 0%, rgba(245,220,170,0.6) 40%, rgba(247,243,236,0) 80%)",
+          background: "linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(250,250,250,0.6) 40%, rgba(250,250,250,0) 80%)",
         }}
       />
 

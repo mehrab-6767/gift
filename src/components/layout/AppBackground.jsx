@@ -2,7 +2,7 @@ function AppBackground() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
       {/* Base */}
-      <div className="absolute inset-0 bg-[#F7F3EC]" />
+      <div className="absolute inset-0 bg-[#FAFAFA]" />
 
       {/* Warm spotlight */}
       <div
@@ -20,7 +20,7 @@ function AppBackground() {
         "
         style={{
           background:
-            "radial-gradient(circle, rgba(255,248,235,.95) 0%, rgba(247,243,236,0) 70%)",
+            "radial-gradient(circle, rgba(255,255,255,.98) 0%, rgba(250,250,250,0) 70%)",
         }}
       />
 

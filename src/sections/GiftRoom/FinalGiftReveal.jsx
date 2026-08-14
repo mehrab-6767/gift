@@ -204,7 +204,7 @@ export default function FinalGiftReveal({ visible, onFinished }) {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full max-w-lg rounded-2xl p-8 sm:p-12 border border-[#D4AF37]/30 shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
             style={{
-              background: "linear-gradient(165deg, #FFFDF8 0%, #F5EFE6 100%)",
+              background: "linear-gradient(165deg, #FFFFFF 0%, #F5F5F5 100%)",
               transformOrigin: "center bottom",
             }}
           >
@@ -296,7 +296,7 @@ export default function FinalGiftReveal({ visible, onFinished }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 2 }}
-          className="fixed inset-0 z-50 pointer-events-none bg-[#F7F3EC]"
+          className="fixed inset-0 z-50 pointer-events-none bg-[#FAFAFA]"
         />
       )}
     </motion.div>

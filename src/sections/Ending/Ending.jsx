@@ -100,15 +100,149 @@ const FINAL_MESSAGES = [
   },
 ];
 
+function EpilogueOverlay() {
+  const [epiPhase, setEpiPhase] = useState(-1); // -1=initial white wash, 0=texts, ...
+
+  useEffect(() => {
+    const t0 = setTimeout(() => setEpiPhase(0), 2000);
+    const t1 = setTimeout(() => setEpiPhase(1), 5000);
+    const t2 = setTimeout(() => setEpiPhase(2), 8000);
+    const t3 = setTimeout(() => setEpiPhase(3), 9500);
+    const t4 = setTimeout(() => setEpiPhase(4), 10500);
+    const t5 = setTimeout(() => setEpiPhase(5), 11500);
+    const t6 = setTimeout(() => setEpiPhase(6), 13000);
+    const t7 = setTimeout(() => setEpiPhase(7), 18000);
+    const t8 = setTimeout(() => setEpiPhase(8), 21000);
+
+    return () => {
+      [t0, t1, t2, t3, t4, t5, t6, t7, t8].forEach(clearTimeout);
+    };
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, backgroundColor: "#FAFAFA" }}
+      animate={{ opacity: 1, backgroundColor: epiPhase >= 8 ? "#000000" : "#FAFAFA" }}
+      transition={{ 
+        opacity: { duration: 2, ease: [0.22, 1, 0.36, 1] }, 
+        backgroundColor: { duration: 3, ease: [0.22, 1, 0.36, 1] } 
+      }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        {Array.from({ length: 40 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-[#D4AF37]"
+            style={{
+              width: Math.random() * 2 + 0.5,
+              height: Math.random() * 2 + 0.5,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{ opacity: [0.1, 0.6, 0.1], y: [0, -10, 0] }}
+            transition={{ duration: 4 + Math.random() * 5, repeat: Infinity, delay: Math.random() * 4 }}
+          />
+        ))}
+      </div>
+
+      <motion.div 
+        className="relative z-10 flex flex-col items-center text-center px-4 w-full"
+        animate={{ opacity: epiPhase >= 7 ? 0 : 1 }}
+        transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {epiPhase >= 0 && (
+          <motion.h1
+            initial={{ opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+            animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+            transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif italic font-light text-[#2D2A26]"
+            style={{ fontSize: "clamp(3rem, 8vw, 5rem)" }}
+          >
+            The End.
+          </motion.h1>
+        )}
+
+        {epiPhase >= 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 flex flex-col items-center gap-1"
+          >
+            <p className="font-serif italic text-lg text-[#2D2A26]/70">Or perhaps...</p>
+            <p className="font-serif italic text-lg text-[#2D2A26]/70">just the beginning.</p>
+          </motion.div>
+        )}
+
+        {epiPhase >= 2 && (
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: "3rem" }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="h-px bg-[#D4AF37]/40 mt-8 mb-8"
+          />
+        )}
+
+        {epiPhase >= 3 && (
+          <motion.p
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-sm uppercase tracking-[0.3em] text-[#B58A2B] mb-3"
+          >
+            Gopalganj ↔ Dhaka
+          </motion.p>
+        )}
+
+        {epiPhase >= 4 && (
+          <motion.p
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-base italic text-[#2D2A26]/80 mb-2"
+          >
+            150 km today.
+          </motion.p>
+        )}
+
+        {epiPhase >= 5 && (
+          <motion.p
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-base italic text-[#6A2135] mb-8"
+          >
+            Hopefully 0 someday.
+          </motion.p>
+        )}
+
+        {epiPhase >= 6 && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-2xl"
+          >
+            ❤️
+          </motion.div>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Ending() {
   const [phase, setPhase] = useState(0); // 0=counter, 1=messages, 2=finale
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 2800);
     const t2 = setTimeout(() => setPhase(2), 9000);
+    const t3 = setTimeout(() => setPhase(3), 22000);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, []);
 
@@ -211,6 +345,9 @@ export default function Ending() {
           </motion.div>
         )}
       </div>
+
+      {/* Phase 3 — Epilogue */}
+      {phase >= 3 && <EpilogueOverlay />}
     </main>
   );
 }

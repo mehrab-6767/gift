@@ -1,5 +1,8 @@
 body {
   font-family: "Cormorant Garamond", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .font-display {
@@ -8,4 +11,13 @@ body {
 
 .font-serif {
   font-family: "EB Garamond", serif;
+}
+
+/* Fluid typography & emotional hierarchy */
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
+p {
+  letter-spacing: 0.01em;
 }

@@ -6,38 +6,60 @@
 /* Forward turn: right-side page flips left (origin = left edge) */
 @keyframes pageForward {
   0%   { transform: rotateY(0deg); }
+  70%  { transform: rotateY(-165deg); }
+  85%  { transform: rotateY(-182deg); }
+  92%  { transform: rotateY(-178deg); }
   100% { transform: rotateY(-180deg); }
 }
 
 /* Backward turn: left-side page flips right (origin = right edge) */
 @keyframes pageBackward {
   0%   { transform: rotateY(0deg); }
+  70%  { transform: rotateY(165deg); }
+  85%  { transform: rotateY(182deg); }
+  92%  { transform: rotateY(178deg); }
   100% { transform: rotateY(180deg); }
 }
 
 /* Cover open: same as pageForward but for the front cover */
 @keyframes coverOpen {
   0%   { transform: rotateY(0deg); }
+  65%  { transform: rotateY(-160deg); }
+  80%  { transform: rotateY(-183deg); }
+  90%  { transform: rotateY(-178deg); }
   100% { transform: rotateY(-180deg); }
 }
 
 /* Cover close: right side folds shut (origin = left edge) */
 @keyframes coverClose {
   0%   { transform: rotateY(0deg); }
+  65%  { transform: rotateY(160deg); }
+  80%  { transform: rotateY(183deg); }
+  90%  { transform: rotateY(178deg); }
   100% { transform: rotateY(180deg); }
 }
 
 /* Shadow that sweeps across the page underneath as it turns */
 @keyframes shadowForward {
   0%   { opacity: 0; transform: translateX(0); }
-  30%  { opacity: 1; }
-  70%  { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-10px); }
+  15%  { opacity: 0.6; }
+  50%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translateX(-12px); }
 }
 
 @keyframes shadowBackward {
   0%   { opacity: 0; transform: translateX(0); }
-  30%  { opacity: 1; }
-  70%  { opacity: 1; }
-  100% { opacity: 0; transform: translateX(10px); }
+  15%  { opacity: 0.6; }
+  50%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translateX(12px); }
+}
+
+/* Highlight on leading edge during page turn */
+@keyframes edgeHighlight {
+  0%   { opacity: 0; }
+  30%  { opacity: 0.6; }
+  60%  { opacity: 0.8; }
+  100% { opacity: 0; }
 }

@@ -136,13 +136,17 @@ export default function Letter() {
         {/* Envelope / Letter Paper Container */}
         <motion.div
           layout
+          animate={{ y: [0, -3, 0] }}
+          transition={{
+            layout: { duration: 0.8 },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          }}
           className="relative w-full rounded-2xl overflow-hidden p-8 sm:p-12"
           style={{
-            background: "linear-gradient(160deg, #FFFDF8 0%, #F5EFE6 100%)",
+            background: "linear-gradient(160deg, #FFFFFF 0%, #F5F5F5 100%)",
             boxShadow: "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(180,140,80,0.3)",
             minHeight: sealed ? 320 : 480,
           }}
-          transition={{ duration: 0.8 }}
         >
           {/* Left margin line */}
           <div

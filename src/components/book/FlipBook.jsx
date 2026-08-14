@@ -52,7 +52,7 @@ function PageFace({ children, side = "right", flipped = false, shadow = "none" }
       className="absolute inset-0 overflow-hidden"
       style={{
         ...borderRadius,
-        background: "#FFFDF8",
+        background: "#FFFFFF",
         ...spineShadow,
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden",
@@ -148,6 +148,7 @@ function TurningSheet({ frontContent, backContent, direction, onDone }) {
         {backContent}
       </PageFace>
 
+      {/* Cast shadow on underlying page */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0"
@@ -159,6 +160,37 @@ function TurningSheet({ frontContent, backContent, direction, onDone }) {
             ? "linear-gradient(to right, rgba(0,0,0,0.18), transparent)"
             : "linear-gradient(to left, rgba(0,0,0,0.18), transparent)",
           animation: `${isForward ? "shadowForward" : "shadowBackward"} ${TURN_MS}ms ${EASE} forwards`,
+        }}
+      />
+
+      {/* Leading edge highlight — subtle white glow on the turning edge */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0"
+        style={{
+          ...(isForward
+            ? { right: 0, width: "3px" }
+            : { left: 0, width: "3px" }),
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.6) 100%)",
+          animation: `edgeHighlight ${TURN_MS}ms ${EASE} forwards`,
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+        }}
+      />
+
+      {/* Page thickness edge — thin visible spine on the turning page */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-1"
+        style={{
+          ...(isForward
+            ? { right: "-1px", width: "2px" }
+            : { left: "-1px", width: "2px" }),
+          background: "linear-gradient(to bottom, #e8e4de 0%, #d8d4ce 50%, #e8e4de 100%)",
+          borderRadius: "1px",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          animation: `edgeHighlight ${TURN_MS}ms ${EASE} forwards`,
         }}
       />
     </div>
@@ -228,7 +260,7 @@ function ClosingCoverSheet({ onDone }) {
         className="absolute inset-0 overflow-hidden"
         style={{
           borderRadius: "0 8px 8px 0",
-          background: "#FFFDF8",
+          background: "#FFFFFF",
           boxShadow: "inset 10px 0 25px rgba(0,0,0,0.10)",
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
@@ -376,10 +408,8 @@ function TurnHitZone({ side, onClick, isTurning, disabled }) {
       aria-label={side === "right" ? "Next page" : "Previous page"}
       onClick={!isTurning ? onClick : undefined}
       onKeyDown={(e) => e.key === "Enter" && !isTurning && onClick?.()}
-      className="absolute inset-y-0 z-40 flex items-center"
+      className="absolute inset-0 z-40 flex items-center cursor-pointer"
       style={{
-        [side]: 0,
-        width: "45%",
         cursor: isTurning ? "default" : (side === "right" ? "e-resize" : "w-resize"),
       }}
     >
@@ -387,7 +417,7 @@ function TurnHitZone({ side, onClick, isTurning, disabled }) {
         <div
           className="absolute"
           style={{
-            [side]: "10px",
+            [side]: "12px",
             opacity: 0.25,
             fontSize: "20px",
             color: "#6A2135",
@@ -463,9 +493,13 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
   /* ── FRONT COVER (closed / opening) ─────────────────────────── */
   if (bookPhase === "cover" || bookPhase === "opening") {
     return (
-      <BookShell>
+      <BookShell onClick={bookPhase === "cover" ? openBook : undefined} isCover={bookPhase === "cover"}>
         {/* Left half: board interior + first left page */}
-        <div className="relative flex-1 overflow-hidden" style={{ borderRadius: "8px 0 0 8px" }}>
+        <div
+          className="relative flex-1 overflow-hidden"
+          style={{ borderRadius: "8px 0 0 8px" }}
+          onClick={bookPhase === "cover" ? openBook : undefined}
+        >
           <div
             className="absolute inset-0"
             style={{ background: "linear-gradient(135deg, #5a1828, #481523, #3a0f1a)", borderRadius: "8px 0 0 8px" }}
@@ -478,7 +512,10 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
         <Spine />
 
         {/* Right half: cover + page underneath */}
-        <div className="relative flex-1">
+        <div
+          className="relative flex-1"
+          onClick={bookPhase === "cover" ? openBook : undefined}
+        >
           {/* Page underneath — visible once cover swings past ~90° */}
           {bookPhase === "opening" && (
             <PageFace side="right">{spread?.right}</PageFace>
@@ -554,7 +591,10 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
   return (
     <BookShell>
       {/* Left board */}
-      <div className="relative flex-1">
+      <div
+        className={`relative flex-1 ${!isAtStart && !isTurning && bookPhase !== "closing" ? "cursor-pointer" : ""}`}
+        onClick={!isAtStart && !isTurning && bookPhase !== "closing" ? turnBackward : undefined}
+      >
         <PageEdgeStack side="left" totalPages={totalSheets} currentPage={currentSheet} />
         <PageFace side="left">{spread?.left}</PageFace>
 
@@ -578,7 +618,10 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
       <Spine />
 
       {/* Right board */}
-      <div className="relative flex-1">
+      <div
+        className={`relative flex-1 ${!isTurning && bookPhase !== "closing" ? "cursor-pointer" : ""}`}
+        onClick={!isTurning && bookPhase !== "closing" ? turnForward : undefined}
+      >
         <PageEdgeStack side="right" totalPages={totalSheets} currentPage={currentSheet} />
         <PageFace side="right">{spread?.right}</PageFace>
 
@@ -616,10 +659,11 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
 }
 
 /* ─── Book shell ────────────────────────────────────────────────────────── */
-function BookShell({ children }) {
+function BookShell({ children, onClick, isCover }) {
   return (
     <div
-      className="relative select-none"
+      onClick={onClick}
+      className={`relative select-none ${isCover ? "cursor-pointer" : ""}`}
       style={{
         width: "min(94vw, 1000px)",
         aspectRatio: "16/9",

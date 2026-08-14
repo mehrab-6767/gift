@@ -99,7 +99,15 @@ function LandingContent({ onOpen }) {
             onClick={onOpen}
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative inline-flex items-center gap-4 px-10 py-4 rounded-full bg-[#FFFDF8] border border-[#B58A2B]/30 text-[#6A2135] shadow-[0_10px_30px_rgba(106,33,53,0.08)] hover:shadow-[0_15px_40px_rgba(106,33,53,0.15)] transition-all duration-500 cursor-pointer"
+            animate={{
+              boxShadow: [
+                "0 10px 30px rgba(106,33,53,0.08)",
+                "0 12px 35px rgba(106,33,53,0.14)",
+                "0 10px 30px rgba(106,33,53,0.08)",
+              ],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="group relative inline-flex items-center gap-4 px-10 py-4 rounded-full bg-[#FFFFFF] border border-[#B58A2B]/30 text-[#6A2135] hover:shadow-[0_15px_40px_rgba(106,33,53,0.15)] transition-all duration-500 cursor-pointer"
           >
             <span className="font-serif text-lg tracking-widest uppercase text-[#6A2135] font-medium">
               Open Your Gift

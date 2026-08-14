@@ -20,7 +20,7 @@ function PhoneMockup({ orientation }) {
       }}
     >
       {/* Screen */}
-      <div className="absolute inset-[5px] rounded-[24px] bg-[#F7F3EC]" />
+      <div className="absolute inset-[5px] rounded-[24px] bg-[#FAFAFA]" />
 
       {/* Camera */}
       <div className="absolute left-1/2 top-2 h-1.5 w-10 -translate-x-1/2 rounded-full bg-neutral-700" />
@@ -65,7 +65,7 @@ export default function RotatePortrait() {
   }, [orientation, goTo]);
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#F7F3EC] px-8 select-none">
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#FAFAFA] px-8 select-none">
       {/* Warm ambient glow */}
       <div className="absolute -right-32 -bottom-32 h-96 w-96 rounded-full bg-[#D4AF37]/20 opacity-30 blur-3xl" />
       <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#6A2135]/15 opacity-20 blur-3xl" />

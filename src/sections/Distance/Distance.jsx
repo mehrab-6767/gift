@@ -107,7 +107,7 @@ export default function Distance() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
           className="relative w-full rounded-2xl p-6 sm:p-10 border border-[#B58A2B]/30 shadow-[0_30px_90px_rgba(0,0,0,0.7)] flex flex-col items-center gap-6 overflow-hidden"
-          style={{ background: "linear-gradient(165deg, #FFFDF8 0%, #F5EFE6 100%)" }}
+          style={{ background: "linear-gradient(165deg, #FFFFFF 0%, #F5F5F5 100%)" }}
         >
           {/* Subtle Paper Texture */}
           <div
@@ -242,7 +242,7 @@ export default function Distance() {
                   animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                 />
-                <div className="h-14 w-14 rounded-full bg-gradient-to-br from-[#FFFDF8] via-[#F5EFE6] to-[#E8DFC8] border-2 border-[#6A2135] shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center transition-transform group-hover:scale-105">
+                <div className="h-14 w-14 rounded-full bg-gradient-to-br from-[#FFFFFF] via-[#F5F5F5] to-[#E5E5E5] border-2 border-[#6A2135] shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center transition-transform group-hover:scale-105">
                   <span className="font-serif text-base font-bold text-[#6A2135]">A</span>
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default function Distance() {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 5 }}
-                    className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#FFFDF8] text-[#6A2135] px-3 py-1 rounded-full text-[10px] font-serif border border-[#B58A2B]/40 shadow-lg pointer-events-none"
+                    className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#FFFFFF] text-[#6A2135] px-3 py-1 rounded-full text-[10px] font-serif border border-[#B58A2B]/40 shadow-lg pointer-events-none"
                   >
                     Receiving your love in Dhaka 🌸
                   </motion.div>
