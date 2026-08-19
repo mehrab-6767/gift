@@ -84,7 +84,7 @@ const LoadingScreen = ({ progress, isReady, onComplete }) => {
               className="font-serif italic text-[#6A2135]"
               style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
             >
-              The Story of Arshiya
+              Loading...
             </motion.h1>
 
             <motion.p

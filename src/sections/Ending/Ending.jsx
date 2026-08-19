@@ -111,23 +111,18 @@ function EpilogueOverlay() {
     const t4 = setTimeout(() => setEpiPhase(4), 10500);
     const t5 = setTimeout(() => setEpiPhase(5), 11500);
     const t6 = setTimeout(() => setEpiPhase(6), 13000);
-    const t7 = setTimeout(() => setEpiPhase(7), 18000);
-    const t8 = setTimeout(() => setEpiPhase(8), 21000);
 
     return () => {
-      [t0, t1, t2, t3, t4, t5, t6, t7, t8].forEach(clearTimeout);
+      [t0, t1, t2, t3, t4, t5, t6].forEach(clearTimeout);
     };
   }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, backgroundColor: "#FAFAFA" }}
-      animate={{ opacity: 1, backgroundColor: epiPhase >= 8 ? "#000000" : "#FAFAFA" }}
-      transition={{ 
-        opacity: { duration: 2, ease: [0.22, 1, 0.36, 1] }, 
-        backgroundColor: { duration: 3, ease: [0.22, 1, 0.36, 1] } 
-      }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-[#FAFAFA]"
     >
       <div className="absolute inset-0 pointer-events-none opacity-40">
         {Array.from({ length: 40 }).map((_, i) => (
@@ -146,11 +141,7 @@ function EpilogueOverlay() {
         ))}
       </div>
 
-      <motion.div 
-        className="relative z-10 flex flex-col items-center text-center px-4 w-full"
-        animate={{ opacity: epiPhase >= 7 ? 0 : 1 }}
-        transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <div className="relative z-10 flex flex-col items-center text-center px-4 w-full">
         {epiPhase >= 0 && (
           <motion.h1
             initial={{ opacity: 0, filter: "blur(10px)", scale: 0.95 }}
@@ -227,7 +218,7 @@ function EpilogueOverlay() {
             ❤️
           </motion.div>
         )}
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

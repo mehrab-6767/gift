@@ -25,9 +25,9 @@ export default function VoiceMessageScene() {
   const [showSkip, setShowSkip] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
 
-  /* Show "Skip" after 6 seconds of the scene being open */
+  /* Show "Skip" shortly after mount */
   useEffect(() => {
-    const t = setTimeout(() => setShowSkip(true), 6000);
+    const t = setTimeout(() => setShowSkip(true), 500);
     return () => clearTimeout(t);
   }, []);
 
@@ -155,19 +155,19 @@ export default function VoiceMessageScene() {
         </AnimatePresence>
       </motion.div>
 
-      {/* Skip button — subtle, appears after 6s */}
+      {/* Skip button — clearly accessible */}
       <AnimatePresence>
         {showSkip && !showContinue && (
           <motion.button
             key="skip-btn"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
             onClick={handleContinue}
-            className="absolute bottom-8 right-8 font-serif text-[11px] uppercase tracking-[0.35em] text-[#FFFDF8]/25 hover:text-[#FFFDF8]/55 transition-colors cursor-pointer"
+            className="absolute top-6 right-6 z-30 px-4 py-2 rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/10 text-[#D4AF37]/80 hover:text-[#D4AF37] hover:border-[#D4AF37]/70 hover:bg-[#D4AF37]/20 font-serif text-[11px] uppercase tracking-[0.25em] transition-all cursor-pointer shadow-md"
           >
-            Skip
+            Skip to next →
           </motion.button>
         )}
       </AnimatePresence>

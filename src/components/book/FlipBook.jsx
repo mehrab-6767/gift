@@ -8,7 +8,7 @@
  *   onFinish     – () => void  called when reader closes the back cover
  */
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ─── constants ─────────────────────────────────────────────────────────── */
@@ -445,6 +445,7 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
   const isAtStart   = currentSheet === 0;
   const isAtEnd     = currentSheet === totalSheets - 1;
   const isOpen      = bookPhase === "open";
+  const isTurningRef = useRef(false);
 
   function openBook() {
     if (bookPhase !== "cover") return;
@@ -455,29 +456,35 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
     setBookPhase("open");
   }
 
-  function turnForward() {
-    if (isTurning || !isOpen) return;
+  function turnForward(e) {
+    e?.stopPropagation?.();
+    if (isTurningRef.current || isTurning || !isOpen) return;
     if (isAtEnd) {
       setBookPhase("closing");
       return;
     }
+    isTurningRef.current = true;
     setIsTurning(true);
     setTurningDir("forward");
     setTimeout(() => {
       setCurrentSheet((s) => s + 1);
       setIsTurning(false);
       setTurningDir(null);
+      isTurningRef.current = false;
     }, TURN_MS);
   }
 
-  function turnBackward() {
-    if (isTurning || !isOpen || isAtStart) return;
+  function turnBackward(e) {
+    e?.stopPropagation?.();
+    if (isTurningRef.current || isTurning || !isOpen || isAtStart) return;
+    isTurningRef.current = true;
     setIsTurning(true);
     setTurningDir("backward");
     setTimeout(() => {
       setCurrentSheet((s) => s - 1);
       setIsTurning(false);
       setTurningDir(null);
+      isTurningRef.current = false;
     }, TURN_MS);
   }
 
@@ -591,10 +598,7 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
   return (
     <BookShell>
       {/* Left board */}
-      <div
-        className={`relative flex-1 ${!isAtStart && !isTurning && bookPhase !== "closing" ? "cursor-pointer" : ""}`}
-        onClick={!isAtStart && !isTurning && bookPhase !== "closing" ? turnBackward : undefined}
-      >
+      <div className="relative flex-1">
         <PageEdgeStack side="left" totalPages={totalSheets} currentPage={currentSheet} />
         <PageFace side="left">{spread?.left}</PageFace>
 
@@ -618,10 +622,7 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
       <Spine />
 
       {/* Right board */}
-      <div
-        className={`relative flex-1 ${!isTurning && bookPhase !== "closing" ? "cursor-pointer" : ""}`}
-        onClick={!isTurning && bookPhase !== "closing" ? turnForward : undefined}
-      >
+      <div className="relative flex-1">
         <PageEdgeStack side="right" totalPages={totalSheets} currentPage={currentSheet} />
         <PageFace side="right">{spread?.right}</PageFace>
 

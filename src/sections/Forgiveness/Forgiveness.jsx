@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAppFlow } from "../../context/AppFlowContext";
 import { FLOW } from "../../config/flow";
 
+const EASE = [0.22, 1, 0.36, 1];
+
 const FORGIVENESS_ENTRIES = [
   {
     id: 1,
@@ -43,6 +45,7 @@ const FORGIVENESS_ENTRIES = [
 
 export default function Forgiveness() {
   const { goTo } = useAppFlow();
+  const [showIntro, setShowIntro] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
@@ -100,123 +103,190 @@ export default function Forgiveness() {
         ))}
       </div>
 
-      <div className="relative z-10 flex w-full max-w-2xl flex-col items-center gap-8 text-center">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="space-y-2"
-        >
-          <p className="font-serif text-xs uppercase tracking-[0.5em] text-[#B58A2B]">
-            Admitting my mistakes
-          </p>
-          <h1 className="font-serif text-3xl sm:text-4xl italic font-light text-[#FFFDF8]">
-            Seeking forgiveness
-          </h1>
-          <p className="font-serif text-xs italic text-[#FFFDF8]/60">
-            "My love, I think it's a good time to seek for your forgiveness for all the terrible things ive done with you, im sorry babe"
-          </p>
-        </motion.div>
-
-        {/* Journal Page Card */}
-        <div
-          className="relative w-full min-h-[380px] rounded-2xl p-8 sm:p-12 shadow-[0_25px_70px_rgba(0,0,0,0.7)] border border-[#B58A2B]/20 flex flex-col justify-between overflow-hidden"
-          style={{ background: "linear-gradient(165deg, #FFFFFF 0%, #F5F5F5 100%)" }}
-        >
-          {/* Paper Texture */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.05]"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E\")",
-            }}
-          />
-
-          {/* Page margin line */}
-          <div className="pointer-events-none absolute top-0 bottom-0 left-8 sm:left-12 w-px bg-[#6A2135]/15" />
-
-          <AnimatePresence mode="wait">
-            {!isFinished ? (
-              <motion.div
-                key={currentEntry.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="relative z-10 flex flex-col gap-6 text-left pl-6 sm:pl-8"
-              >
-                {/* Date & Entry Number */}
-                <div className="flex items-center justify-between border-b border-[#B58A2B]/20 pb-3">
-                  <span className="font-serif text-xs uppercase tracking-[0.3em] text-[#B58A2B]">
-                    {currentEntry.date}
-                  </span>
-                  <span className="font-serif text-xs italic text-[#2D2A26]/50">
-                    Entry 0{currentEntry.id} / 0{FORGIVENESS_ENTRIES.length}
-                  </span>
-                </div>
-
-                {/* Single text block */}
-                <p className="font-serif text-sm sm:text-base leading-relaxed text-[#2D2A26]/85 font-light italic">
-                  {currentEntry.text}
-                </p>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="promise-summary"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative z-10 flex flex-col items-center justify-center h-full my-auto text-center px-4 space-y-6"
-              >
-                <span className="text-3xl text-[#B58A2B]">❀</span>
-                <p className="font-serif text-xs uppercase tracking-[0.4em] text-[#B58A2B]">
-                  My Solemn Promise
-                </p>
-                <blockquote className="font-serif text-lg sm:text-xl text-[#6A2135] italic leading-relaxed font-light max-w-md">
-                  "I cannot change those moments. But I promise to become someone who gives you more reasons to smile than to cry. And even after all those terrible things, we still kept on loving each other like always, thank you so much for that."
-                </blockquote>
-                <div className="h-px w-16 bg-[#B58A2B]/40 my-2" />
-                <p className="font-serif text-xs text-[#2D2A26]/60 italic">
-                  — Mehrab
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Navigation Footer */}
-          <div className="relative z-10 flex items-center justify-between pt-6 border-t border-[#B58A2B]/20">
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0 && !isFinished}
-              className={`font-serif text-xs uppercase tracking-widest transition-opacity cursor-pointer ${
-                currentIndex === 0 && !isFinished
-                  ? "opacity-0 pointer-events-none"
-                  : "text-[#2D2A26]/60 hover:text-[#6A2135]"
-              }`}
+      <AnimatePresence mode="wait">
+        {/* ── Dark Title Screen Prologue ────────────────────────── */}
+        {showIntro ? (
+          <motion.div
+            key="forgiveness-intro"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98, filter: "blur(6px)" }}
+            transition={{ duration: 1, ease: EASE }}
+            className="relative z-10 flex w-full max-w-xl flex-col items-center gap-8 text-center px-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: EASE }}
+              className="space-y-3"
             >
-              ← Previous
-            </button>
+              <p className="font-serif text-xs uppercase tracking-[0.5em] text-[#B58A2B]">
+                A Sincere Confession
+              </p>
+              <div className="h-px w-8 bg-[#B58A2B]/40 mx-auto" />
+            </motion.div>
 
-            {!isFinished ? (
+            {/* Main Apology Title Quote */}
+            <motion.h1
+              initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1.4, delay: 0.6, ease: EASE }}
+              className="font-serif text-2xl sm:text-4xl italic font-light text-[#FFFDF8] leading-relaxed"
+              style={{ textShadow: "0 0 35px rgba(217,119,54,0.25)" }}
+            >
+              "I wanna apologize for all my mistakes, for all the times I made you angry, and cry."
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: 1.2, ease: EASE }}
+              className="font-serif text-xs sm:text-sm italic text-[#FFFDF8]/60 max-w-md font-light leading-relaxed"
+            >
+              Before we look ahead into our future, I want to be completely honest about every moment I wish I could take back.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.8, ease: EASE }}
+              className="pt-4"
+            >
               <button
-                onClick={handleNext}
-                className="font-serif text-xs uppercase tracking-widest text-[#6A2135] hover:text-[#B58A2B] font-medium transition-colors cursor-pointer"
+                onClick={() => setShowIntro(false)}
+                className="px-8 py-3.5 rounded-full bg-[#6A2135] text-[#FFFDF8] border border-[#D4AF37]/40 font-serif text-xs uppercase tracking-widest shadow-xl hover:bg-[#8b2b46] hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
-                {currentIndex === FORGIVENESS_ENTRIES.length - 1 ? "Reflect →" : "Next →"}
+                Open My Apology Journal →
               </button>
-            ) : (
-              <button
-                onClick={() => goTo(FLOW.LETTER)}
-                className="px-6 py-2.5 rounded-full bg-[#6A2135] text-[#FFFDF8] font-serif text-xs uppercase tracking-widest hover:bg-[#8b2b46] transition-all cursor-pointer shadow-md"
-              >
-                Read My Letter ✦
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+            </motion.div>
+          </motion.div>
+        ) : (
+          /* ── Journal Page Section ────────────────────────────── */
+          <motion.div
+            key="forgiveness-journal"
+            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="relative z-10 flex w-full max-w-2xl flex-col items-center gap-8 text-center"
+          >
+            {/* Header */}
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2 }}
+              className="space-y-2"
+            >
+              <p className="font-serif text-xs uppercase tracking-[0.5em] text-[#B58A2B]">
+                Admitting my mistakes
+              </p>
+              <h2 className="font-serif text-3xl sm:text-4xl italic font-light text-[#FFFDF8]">
+                Seeking forgiveness
+              </h2>
+              <p className="font-serif text-xs italic text-[#FFFDF8]/60">
+                "My love, I think it's a good time to seek for your forgiveness for all the terrible things ive done with you, im sorry babe"
+              </p>
+            </motion.div>
+
+            {/* Journal Page Card */}
+            <div
+              className="relative w-full min-h-[380px] rounded-2xl p-8 sm:p-12 shadow-[0_25px_70px_rgba(0,0,0,0.7)] border border-[#B58A2B]/20 flex flex-col justify-between overflow-hidden"
+              style={{ background: "linear-gradient(165deg, #FFFFFF 0%, #F5F5F5 100%)" }}
+            >
+              {/* Paper Texture */}
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.05]"
+                style={{
+                  backgroundImage:
+                    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E\")",
+                }}
+              />
+
+              {/* Page margin line */}
+              <div className="pointer-events-none absolute top-0 bottom-0 left-8 sm:left-12 w-px bg-[#6A2135]/15" />
+
+              <AnimatePresence mode="wait">
+                {!isFinished ? (
+                  <motion.div
+                    key={currentEntry.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="relative z-10 flex flex-col gap-6 text-left pl-6 sm:pl-8"
+                  >
+                    {/* Date & Entry Number */}
+                    <div className="flex items-center justify-between border-b border-[#B58A2B]/20 pb-3">
+                      <span className="font-serif text-xs uppercase tracking-[0.3em] text-[#B58A2B]">
+                        {currentEntry.date}
+                      </span>
+                      <span className="font-serif text-xs italic text-[#2D2A26]/50">
+                        Entry 0{currentEntry.id} / 0{FORGIVENESS_ENTRIES.length}
+                      </span>
+                    </div>
+
+                    {/* Single text block */}
+                    <p className="font-serif text-sm sm:text-base leading-relaxed text-[#2D2A26]/85 font-light italic">
+                      {currentEntry.text}
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="promise-summary"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative z-10 flex flex-col items-center justify-center h-full my-auto text-center px-4 space-y-6"
+                  >
+                    <span className="text-3xl text-[#B58A2B]">❀</span>
+                    <p className="font-serif text-xs uppercase tracking-[0.4em] text-[#B58A2B]">
+                      My Solemn Promise
+                    </p>
+                    <blockquote className="font-serif text-lg sm:text-xl text-[#6A2135] italic leading-relaxed font-light max-w-md">
+                      "I cannot change those moments. But I promise to become someone who gives you more reasons to smile than to cry. And even after all those terrible things, we still kept on loving each other like always, thank you so much for that."
+                    </blockquote>
+                    <div className="h-px w-16 bg-[#B58A2B]/40 my-2" />
+                    <p className="font-serif text-xs text-[#2D2A26]/60 italic">
+                      — Mehrab
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Navigation Footer */}
+              <div className="relative z-10 flex items-center justify-between pt-6 border-t border-[#B58A2B]/20">
+                <button
+                  onClick={handlePrev}
+                  disabled={currentIndex === 0 && !isFinished}
+                  className={`font-serif text-xs uppercase tracking-widest transition-opacity cursor-pointer ${
+                    currentIndex === 0 && !isFinished
+                      ? "opacity-0 pointer-events-none"
+                      : "text-[#2D2A26]/60 hover:text-[#6A2135]"
+                  }`}
+                >
+                  ← Previous
+                </button>
+
+                {!isFinished ? (
+                  <button
+                    onClick={handleNext}
+                    className="font-serif text-xs uppercase tracking-widest text-[#6A2135] hover:text-[#B58A2B] font-medium transition-colors cursor-pointer"
+                  >
+                    {currentIndex === FORGIVENESS_ENTRIES.length - 1 ? "Reflect →" : "Next →"}
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => goTo(FLOW.LETTER)}
+                    className="px-6 py-2.5 rounded-full bg-[#6A2135] text-[#FFFDF8] font-serif text-xs uppercase tracking-widest hover:bg-[#8b2b46] transition-all cursor-pointer shadow-md"
+                  >
+                    Read My Letter ✦
+                  </button>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
