@@ -312,14 +312,14 @@ function Spine() {
     <div
       className="relative flex-shrink-0"
       style={{
-        width: "24px",
+        width: "clamp(14px, 2.4vw, 22px)",
         background: "linear-gradient(to right, #3a1810 0%, #6a2820 30%, #8a3830 50%, #6a2820 70%, #3a1810 100%)",
         boxShadow: "2px 0 8px rgba(0,0,0,0.3), -2px 0 8px rgba(0,0,0,0.3)",
         zIndex: 60,
       }}
     >
-      <div className="absolute inset-y-0 left-[4px] w-px bg-[#B58A2B]/40" />
-      <div className="absolute inset-y-0 right-[4px] w-px bg-[#B58A2B]/40" />
+      <div className="absolute inset-y-0 left-[3px] sm:left-[4px] w-px bg-[#B58A2B]/40" />
+      <div className="absolute inset-y-0 right-[3px] sm:right-[4px] w-px bg-[#B58A2B]/40" />
       <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-[#B58A2B]/20" />
     </div>
   );
@@ -328,15 +328,15 @@ function Spine() {
 /* ─── Page edge stack ───────────────────────────────────────────────────── */
 function PageEdgeStack({ side, totalPages, currentPage }) {
   const remaining = side === "right" ? totalPages - currentPage : currentPage;
-  const thickness = clamp(remaining * 2.5, 1, 28);
+  const thickness = clamp(remaining * 2, 1, 24);
 
   return (
     <div
       className="pointer-events-none absolute"
       style={{
         [side === "right" ? "right" : "left"]: "-1px",
-        top: "4px",
-        bottom: "4px",
+        top: "2px",
+        bottom: "2px",
         width: `${thickness}px`,
         background:
           side === "right"
@@ -417,9 +417,9 @@ function TurnHitZone({ side, onClick, isTurning, disabled }) {
         <div
           className="absolute"
           style={{
-            [side]: "12px",
+            [side]: "clamp(6px, 1.5cqw, 14px)",
             opacity: 0.25,
-            fontSize: "20px",
+            fontSize: "clamp(14px, 2.5cqw, 20px)",
             color: "#6A2135",
             pointerEvents: "none",
             userSelect: "none",
@@ -544,13 +544,20 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
 
           {/* Tap prompt */}
           {bookPhase === "cover" && (
-            <div className="absolute inset-0 flex items-end justify-center pb-8 pointer-events-none z-[80]">
+            <div className="absolute inset-0 flex items-end justify-center pb-4 sm:pb-7 pointer-events-none z-[80]">
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: [0.4, 0.9, 0.4], y: [0, -4, 0] }}
+                animate={{ opacity: [0.4, 0.9, 0.4], y: [0, -3, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                <p className="font-serif text-xs uppercase tracking-[0.4em] text-[#d8bb67]/80">
+                <p
+                  className="font-serif uppercase"
+                  style={{
+                    fontSize: "clamp(9px, 1.4cqw, 12px)",
+                    letterSpacing: "0.35em",
+                    color: "#d8bb67"
+                  }}
+                >
                   Tap to open
                 </p>
               </motion.div>
@@ -564,7 +571,7 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
   /* ── BACK COVER (closed) ────────────────────────────────────── */
   if (bookPhase === "closed-back") {
     return (
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-4 sm:gap-8">
         <BookShell>
           <BackCover>{coverBack}</BackCover>
         </BookShell>
@@ -578,7 +585,7 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
               transition={{ duration: 0.8, ease: "easeOut" }}
               id="book-finish-btn"
               onClick={onFinish}
-              className="px-10 py-4 rounded-full font-serif text-sm uppercase tracking-widest cursor-pointer"
+              className="px-6 py-2.5 sm:px-10 sm:py-4 rounded-full font-serif text-xs sm:text-sm uppercase tracking-widest cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.06) 100%)",
                 border: "1px solid rgba(212,175,55,0.45)",
@@ -650,8 +657,14 @@ export default function FlipBook({ pages, coverFront, coverBack, onFinish }) {
 
       {/* Page indicator */}
       <div
-        className="absolute bottom-3 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
-        style={{ fontSize: "10px", color: "rgba(106,33,53,0.4)", fontFamily: "serif", letterSpacing: "0.2em" }}
+        className="absolute left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+        style={{
+          bottom: "clamp(3px, 1cqw, 8px)",
+          fontSize: "clamp(8px, 1.2cqw, 10px)",
+          color: "rgba(106,33,53,0.45)",
+          fontFamily: "serif",
+          letterSpacing: "0.2em"
+        }}
       >
         {currentSheet + 1} / {totalSheets}
       </div>
@@ -666,16 +679,19 @@ function BookShell({ children, onClick, isCover }) {
       onClick={onClick}
       className={`relative select-none ${isCover ? "cursor-pointer" : ""}`}
       style={{
-        width: "min(94vw, 1000px)",
-        aspectRatio: "16/9",
+        width: "min(94vw, calc((100dvh - 20px) * 1.6), calc((100vh - 20px) * 1.6), 960px)",
+        maxWidth: "960px",
+        maxHeight: "calc(100dvh - 20px)",
+        aspectRatio: "1.6 / 1",
         perspective: "2800px",
         perspectiveOrigin: "50% 40%",
+        containerType: "inline-size",
       }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-12 left-1/2 -translate-x-1/2 rounded-full blur-3xl"
-        style={{ width: "70%", height: "48px", background: "rgba(0,0,0,0.22)" }}
+        className="pointer-events-none absolute -bottom-8 sm:-bottom-12 left-1/2 -translate-x-1/2 rounded-full blur-2xl sm:blur-3xl"
+        style={{ width: "70%", height: "clamp(24px, 6cqw, 48px)", background: "rgba(0,0,0,0.22)" }}
       />
 
       <div
@@ -683,7 +699,7 @@ function BookShell({ children, onClick, isCover }) {
         style={{
           transform: "rotateX(4deg)",
           transformStyle: "preserve-3d",
-          boxShadow: "0 40px 80px rgba(0,0,0,0.35), 0 12px 30px rgba(0,0,0,0.2)",
+          boxShadow: "0 25px 60px rgba(0,0,0,0.32), 0 8px 20px rgba(0,0,0,0.18)",
           borderRadius: "8px 18px 18px 8px",
         }}
       >

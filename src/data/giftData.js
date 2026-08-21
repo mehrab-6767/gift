@@ -9,7 +9,7 @@ export const GIFTS = [
     accentColor: "#E5A93C",
     tag: "A Fragrant Promise",
     message:
-      "This bouquet is only a tiny reminder of how beautiful you are.",
+      "Some flowers for you which i crave to give you in real life. But anyways, these are just a small reminder of how beautiful you are.",
   },
   {
     id: "lipgloss",
@@ -21,7 +21,7 @@ export const GIFTS = [
     accentColor: "#F4C430",
     tag: "A Shade of Happiness",
     message:
-      "A little shade of happiness for your beautiful smile.",
+      "As far as i know, you love lip glosses. Since im currently not able to give them to you in real life, keep this virtual one for now.",
   },
   {
     id: "plushie",
@@ -33,7 +33,7 @@ export const GIFTS = [
     accentColor: "#D4AF37",
     tag: "A Warm Hug",
     message:
-      "So you always have something soft to hug when I'm 150 km away.",
+      "Tumi chaisila ekta otter plushie, ekdin shotti i dibo apatoto etai rakho.",
   },
   {
     id: "churi",
@@ -45,7 +45,7 @@ export const GIFTS = [
     accentColor: "#E5C158",
     tag: "Bangla Tradition",
     message:
-      "Traditional Bangla hand bangles crafted for your lovely wrists.",
+      "You also asked me for these churis a few weeks ago, I'll give them to you in future inshaallah.",
   },
   {
     id: "jhumkas",

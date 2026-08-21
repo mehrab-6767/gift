@@ -20,7 +20,7 @@ function MemoryBook() {
       <DustParticles />
 
       <CameraRig>
-        <main className="relative flex min-h-screen items-center justify-center px-4 pb-16">
+        <main className="relative flex h-[100dvh] h-screen w-full items-center justify-center p-2 sm:p-4 overflow-hidden">
           <Book onFinish={() => goTo(FLOW.ROTATE_PORTRAIT)} />
         </main>
       </CameraRig>

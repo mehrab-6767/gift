@@ -42,30 +42,35 @@ function FrontCoverContent() {
       {/* Gold filigree borders */}
       <div
         aria-hidden
-        className="absolute inset-4 rounded-xl pointer-events-none"
+        className="absolute inset-2 sm:inset-4 rounded-lg sm:rounded-xl pointer-events-none"
         style={{ border: "1px solid rgba(181,138,43,0.4)" }}
       />
       <div
         aria-hidden
-        className="absolute inset-5 rounded-lg pointer-events-none"
+        className="absolute inset-3 sm:inset-5 rounded-md sm:rounded-lg pointer-events-none"
         style={{ border: "1px solid rgba(181,138,43,0.2)" }}
       />
 
       {/* Gold corner guards */}
-      <div aria-hidden className="absolute top-2 right-2 w-8 h-8 pointer-events-none"
+      <div aria-hidden className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-5 h-5 sm:w-8 sm:h-8 pointer-events-none"
         style={{ borderTop: "2px solid rgba(181,138,43,0.7)", borderRight: "2px solid rgba(181,138,43,0.7)", borderRadius: "0 6px 0 0" }} />
-      <div aria-hidden className="absolute bottom-2 right-2 w-8 h-8 pointer-events-none"
+      <div aria-hidden className="absolute bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 w-5 h-5 sm:w-8 sm:h-8 pointer-events-none"
         style={{ borderBottom: "2px solid rgba(181,138,43,0.7)", borderRight: "2px solid rgba(181,138,43,0.7)", borderRadius: "0 0 6px 0" }} />
-      <div aria-hidden className="absolute top-2 left-2 w-8 h-8 pointer-events-none"
+      <div aria-hidden className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 w-5 h-5 sm:w-8 sm:h-8 pointer-events-none"
         style={{ borderTop: "2px solid rgba(181,138,43,0.5)", borderLeft: "2px solid rgba(181,138,43,0.5)", borderRadius: "6px 0 0 0" }} />
-      <div aria-hidden className="absolute bottom-2 left-2 w-8 h-8 pointer-events-none"
+      <div aria-hidden className="absolute bottom-1.5 left-1.5 sm:bottom-2 sm:left-2 w-5 h-5 sm:w-8 sm:h-8 pointer-events-none"
         style={{ borderBottom: "2px solid rgba(181,138,43,0.5)", borderLeft: "2px solid rgba(181,138,43,0.5)", borderRadius: "0 0 0 6px" }} />
 
       {/* Cover title */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-12 text-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-12 text-center">
         <p
           className="uppercase"
-          style={{ fontSize: "0.65rem", letterSpacing: "0.5em", color: "#d8bb67", marginBottom: "1.4rem" }}
+          style={{
+            fontSize: "clamp(0.5rem, 1.8cqw, 0.65rem)",
+            letterSpacing: "0.45em",
+            color: "#d8bb67",
+            marginBottom: "clamp(0.4rem, 2cqh, 1.2rem)"
+          }}
         >
           A Birthday Gift
         </p>
@@ -73,7 +78,7 @@ function FrontCoverContent() {
         <h1
           style={{
             fontFamily: "serif",
-            fontSize: "clamp(2.4rem, 5vw, 4rem)",
+            fontSize: "clamp(1.6rem, 5.5cqw, 3.8rem)",
             color: "#B58A2B",
             fontWeight: 300,
             lineHeight: 1,
@@ -85,11 +90,11 @@ function FrontCoverContent() {
         <h2
           style={{
             fontFamily: "serif",
-            fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
+            fontSize: "clamp(1.3rem, 4.5cqw, 2.8rem)",
             color: "#f2deb0",
             fontWeight: 400,
             letterSpacing: "0.05em",
-            marginTop: "0.5rem",
+            marginTop: "0.25rem",
           }}
         >
           Arshiya
@@ -97,12 +102,21 @@ function FrontCoverContent() {
 
         <div
           className="rounded-full"
-          style={{ height: "1px", width: "60px", background: "rgba(181,138,43,0.4)", margin: "1.8rem auto" }}
+          style={{
+            height: "1px",
+            width: "clamp(32px, 8cqw, 60px)",
+            background: "rgba(181,138,43,0.4)",
+            margin: "clamp(0.4rem, 2cqh, 1.4rem) auto"
+          }}
         />
 
         <p
           className="uppercase"
-          style={{ fontSize: "0.65rem", letterSpacing: "0.35em", color: "#d8bb67CC" }}
+          style={{
+            fontSize: "clamp(0.5rem, 1.8cqw, 0.65rem)",
+            letterSpacing: "0.35em",
+            color: "#d8bb67CC"
+          }}
         >
           August 23, 2026
         </p>
