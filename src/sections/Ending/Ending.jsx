@@ -82,21 +82,21 @@ const FINAL_MESSAGES = [
     text: "You are so deeply, endlessly loved.",
     size: "clamp(1.5rem, 3.5vw, 2.4rem)",
     color: "#FFFDF8",
-    delay: 0.5,
+    delay: 0.3,
   },
   {
     id: "b",
     text: "Not just today on your birthday, but every single second across every mile.",
     size: "clamp(1.1rem, 2.5vw, 1.6rem)",
     color: "rgba(255,253,248,0.75)",
-    delay: 3.0,
+    delay: 1.6,
   },
   {
     id: "c",
     text: "Happy 14th Birthday, Arshiya.",
     size: "clamp(2rem, 5vw, 3.8rem)",
     color: "#D4AF37",
-    delay: 5.8,
+    delay: 3.2,
   },
 ];
 
@@ -104,16 +104,17 @@ function EpilogueOverlay() {
   const [epiPhase, setEpiPhase] = useState(-1); // -1=initial white wash, 0=texts, ...
 
   useEffect(() => {
-    const t0 = setTimeout(() => setEpiPhase(0), 2000);
-    const t1 = setTimeout(() => setEpiPhase(1), 5000);
-    const t2 = setTimeout(() => setEpiPhase(2), 8000);
-    const t3 = setTimeout(() => setEpiPhase(3), 9500);
-    const t4 = setTimeout(() => setEpiPhase(4), 10500);
-    const t5 = setTimeout(() => setEpiPhase(5), 11500);
-    const t6 = setTimeout(() => setEpiPhase(6), 13000);
+    const t0 = setTimeout(() => setEpiPhase(0), 1000);
+    const t1 = setTimeout(() => setEpiPhase(1), 2500);
+    const t2 = setTimeout(() => setEpiPhase(2), 4000);
+    const t3 = setTimeout(() => setEpiPhase(3), 5000);
+    const t4 = setTimeout(() => setEpiPhase(4), 6000);
+    const t5 = setTimeout(() => setEpiPhase(5), 7000);
+    const t6 = setTimeout(() => setEpiPhase(6), 8000);
+    const t7 = setTimeout(() => setEpiPhase(7), 9200);
 
     return () => {
-      [t0, t1, t2, t3, t4, t5, t6].forEach(clearTimeout);
+      [t0, t1, t2, t3, t4, t5, t6, t7].forEach(clearTimeout);
     };
   }, []);
 
@@ -218,6 +219,17 @@ function EpilogueOverlay() {
             ❤️
           </motion.div>
         )}
+
+        {epiPhase >= 7 && (
+          <motion.p
+            initial={{ opacity: 0, y: 8, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-[10px] sm:text-xs uppercase tracking-[0.6em] text-[#D4AF37]/50 pt-10"
+          >
+            The end of the gift
+          </motion.p>
+        )}
       </div>
     </motion.div>
   );
@@ -227,9 +239,9 @@ export default function Ending() {
   const [phase, setPhase] = useState(0); // 0=counter, 1=messages, 2=finale
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 2800);
-    const t2 = setTimeout(() => setPhase(2), 9000);
-    const t3 = setTimeout(() => setPhase(3), 22000);
+    const t1 = setTimeout(() => setPhase(1), 2200);
+    const t2 = setTimeout(() => setPhase(2), 6500);
+    const t3 = setTimeout(() => setPhase(3), 12000);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -324,13 +336,8 @@ export default function Ending() {
               <p className="font-serif text-lg text-[#D4AF37] italic font-medium">
                 I love you.
               </p>
-              <p className="font-serif text-xs uppercase tracking-[0.4em] text-[#FFFDF8]/60 pt-2 pb-8">
+              <p className="font-serif text-xs uppercase tracking-[0.4em] text-[#FFFDF8]/60 pt-2">
                 — Mehrab
-              </p>
-              
-              {/* The End Note */}
-              <p className="font-serif text-[10px] uppercase tracking-[0.6em] text-[#D4AF37]/40 pt-12">
-                The end of the gift
               </p>
             </div>
           </motion.div>

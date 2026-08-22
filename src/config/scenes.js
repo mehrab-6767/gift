@@ -1,14 +1,14 @@
 import Landing from "../sections/Landing/Landing";
+import Candles from "../sections/Candles/Candles";
 import RotateLandscape from "../sections/RotateLandscape/RotateLandscape";
 import MemoryBook from "../sections/MemoryBook/MemoryBook";
 import RotatePortrait from "../sections/RotatePortrait/RotatePortrait";
 
 import GiftRoom from "../sections/GiftRoom/GiftRoom";
 import Distance from "../sections/Distance/Distance";
-import Forgiveness from "../sections/Forgiveness/Forgiveness";
+
 import Letter from "../sections/Letter/Letter";
 import Future from "../sections/Future/Future";
-import VoiceMessageScene from "../sections/VoiceMessage/VoiceMessageScene";
 import ThankYou from "../sections/ThankYou/ThankYou";
 import Ending from "../sections/Ending/Ending";
 
@@ -16,6 +16,8 @@ import { FLOW } from "./flow";
 
 export const SCENES = {
   [FLOW.WELCOME]: Landing,
+
+  [FLOW.CANDLES]: Candles,
 
   [FLOW.ROTATE_LANDSCAPE]: RotateLandscape,
 
@@ -27,13 +29,10 @@ export const SCENES = {
 
   [FLOW.DISTANCE]: Distance,
 
-  [FLOW.FORGIVENESS]: Forgiveness,
 
   [FLOW.LETTER]: Letter,
 
   [FLOW.FUTURE]: Future,
-
-  [FLOW.VOICE_MESSAGE]: VoiceMessageScene,
 
   [FLOW.THANK_YOU]: ThankYou,
 

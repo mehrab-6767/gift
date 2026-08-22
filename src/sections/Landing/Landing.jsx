@@ -7,7 +7,7 @@ function Landing() {
 
   return (
     <LandingContent
-      onOpen={() => goTo(FLOW.ROTATE_LANDSCAPE)}
+      onOpen={() => goTo(FLOW.CANDLES)}
     />
   );
 }

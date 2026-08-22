@@ -80,14 +80,44 @@ function WaxSeal({ onBreak }) {
 }
 
 const LETTER_PARAGRAPHS = [
-  "My dearest Arshiya,",
-  "If I could fold every feeling I have for you into a piece of paper and press it into your hands, this letter would be it.",
-  "I've been counting — not just the 14 years of your life, but all the quiet moments in between. The way your laugh lights up a room, the kindness in your voice, and how you make every ordinary day feel like the best story I'll ever get to tell.",
-  "Living 150 kilometers away in Gopalganj while you are in Dhaka hasn't always been easy. But distance has taught me one undeniable truth: true connection isn't measured in kilometers, but in how deeply two people hold each other in their thoughts.",
-  "You deserve a thousand handwritten letters. Know that behind every single word here is gratitude, wonder, and an affection that no words could fully capture.",
-  "Happy 14th Birthday, my love. The world became immeasurably more beautiful the day you were born.",
+  "My Dearest Arshiya,",
+  "Happy 14th Birthday, my love. ❤️",
+  "It's hard to believe that this is your first birthday we're celebrating together.",
+  "We met on 25 October 2025, completely online, never knowing that a simple meeting would eventually become something so important to both of us. And then, on 22 November 2025 at 12:49 AM, we became us.",
+  "Now here I am, writing a birthday letter to the girl who somehow became such a huge part of my life.",
+  "I wish I could be beside you today. I wish I could see your face when you wake up, give you your presents myself, and hear you laugh when you open them.",
+  "But even with 150 kilometres between us, I wanted to send you a little piece of my heart.",
+  "And I hope you know just how beautiful I think you are.",
+  "Your eyes are one of my favorite things about you. I could look into them forever and still find something beautiful about them. And your smile... I genuinely don't think you realize how easily it can make my entire day better.",
+  "Your lips, your hair, your face, those tiny expressions you make without even noticing—you somehow manage to look beautiful without even trying.",
+  "But as much as I love the way you look, that's not what made me fall for you.",
+  "It was you.",
+  "Your personality.",
+  "Your kindness.",
+  "Your silly side.",
+  "Your stubbornness(its cute and also your freaky side hehe).",
+  "The way you care about me. The way you get excited over little things. The way you can make me laugh when I don't even feel like laughing.",
+  "I love all those little pieces of you that make you Arshiya.",
+  "We've had our beautiful days, and we've had our difficult ones too. We've argued, misunderstood each other, gotten annoyed, and sometimes hurt each other.",
+  "But through all of it, I'm grateful that we've continued choosing each other.",
+  "Because when I think about us, I don't want to remember the arguments.",
+  "I want to remember the late-night conversations, the stupid jokes, the random things we tell each other, the moments when we miss each other, the moments only we knows about, and all the little memories that somehow became important just because they were ours.",
+  "Today, though, I don't want you thinking about any of that.",
+  "Today is about you.",
+  "I hope 14 brings you countless reasons to smile. I hope you become even more confident, happier, and more yourself.",
+  "And I hope you always remember that, there's a boy who is incredibly grateful that you were born.",
+  "One day, I hope birthdays won't have to be celebrated through a screen.",
+  "I hope I'll be standing right in front of you, handing you your gift, looking into those beautiful eyes of yours, and saying:",
+  "\"Happy Birthday, my love.\"",
+  "Until then, I'll keep finding little ways to cross the distance.",
+  "So here's to you, my beautiful wifey.",
+  "Happy 14th Birthday, Arshiya. ❤️",
+  "Thank you for coming into my life.",
+  "Thank you for every memory.",
+  "And thank you for simply being you.",
+  "I love you more than this little letter could ever explain.",
   "Forever yours,",
-  "~ Mehrab ♥",
+  "~ Mehrab ❤️",
 ];
 
 export default function Letter() {
@@ -100,13 +130,13 @@ export default function Letter() {
     setSealed(false);
     setTimeout(() => {
       setIsOpen(true);
-      setTimeout(() => setShowCta(true), 4000);
+      setTimeout(() => setShowCta(true), 2500);
     }, 600);
   }
 
   return (
     <main
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-4 py-12 select-none"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden px-4 py-12 select-none"
       style={{
         background: "radial-gradient(ellipse at 50% 20%, #2d1b0e 0%, #1a0f08 50%, #0f0806 100%)",
       }}
@@ -136,22 +166,33 @@ export default function Letter() {
         {/* Envelope / Letter Paper Container */}
         <motion.div
           layout
-          animate={{ y: [0, -3, 0] }}
+          animate={{ y: sealed ? [0, -3, 0] : 0 }}
           transition={{
             layout: { duration: 0.8 },
-            y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+            y: sealed
+              ? { duration: 6, repeat: Infinity, ease: "easeInOut" }
+              : { duration: 0.4 },
           }}
-          className="relative w-full rounded-2xl overflow-hidden p-8 sm:p-12"
+          className="relative w-full rounded-2xl overflow-hidden p-6 sm:p-10 md:p-12"
           style={{
-            background: "linear-gradient(160deg, #FFFFFF 0%, #F5F5F5 100%)",
+            background: "linear-gradient(160deg, #FFFFFF 0%, #FBFBFB 100%)",
             boxShadow: "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(180,140,80,0.3)",
             minHeight: sealed ? 320 : 480,
           }}
         >
+          {/* Subtle paper texture overlay */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")",
+            }}
+          />
+
           {/* Left margin line */}
           <div
-            className="absolute top-0 bottom-0 w-px opacity-20"
-            style={{ left: "10%", background: "#6A2135" }}
+            className="absolute top-0 bottom-0 w-px opacity-15"
+            style={{ left: "6%", sm: { left: "8%" }, background: "#6A2135" }}
           />
 
           {/* Sealed View */}
@@ -174,31 +215,52 @@ export default function Letter() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="space-y-4 pl-4 text-left"
+              className="space-y-3 sm:space-y-4 pl-4 sm:pl-6 text-left"
             >
               <div className="text-right font-serif text-xs italic text-[#B58A2B] mb-4">
                 23 August 2026
               </div>
 
-              {LETTER_PARAGRAPHS.map((p, idx) => (
-                <motion.p
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: isOpen ? 1 : 0, y: 0 }}
-                  transition={{ delay: idx * 0.35 + 0.3, duration: 0.6 }}
-                  className={`font-serif leading-relaxed ${
-                    idx === 0
-                      ? "text-xl font-normal text-[#6A2135] italic"
-                      : idx === LETTER_PARAGRAPHS.length - 2
-                      ? "text-base font-medium text-[#6A2135]"
-                      : idx === LETTER_PARAGRAPHS.length - 1
-                      ? "text-lg font-bold text-[#6A2135] italic text-right mt-6"
-                      : "text-sm text-[#2D2A26]/85 font-light"
-                  }`}
-                >
-                  {p}
-                </motion.p>
-              ))}
+              {LETTER_PARAGRAPHS.map((p, idx) => {
+                const isTitle = idx === 0;
+                const isPreSignature = idx === LETTER_PARAGRAPHS.length - 2;
+                const isSignature = idx === LETTER_PARAGRAPHS.length - 1;
+                const isShortCallout =
+                  p === "It was you." ||
+                  p === "Your personality." ||
+                  p === "Your kindness." ||
+                  p === "Your silly side." ||
+                  p === "Your stubbornness. 😭" ||
+                  p === "Today is about you.";
+
+                return (
+                  <motion.p
+                    key={idx}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isOpen ? 1 : 0 }}
+                    transition={{
+                      delay: Math.min(idx * 0.07 + 0.2, 2.5),
+                      duration: 0.5,
+                      ease: "easeOut",
+                    }}
+                    className={`font-serif leading-relaxed ${
+                      isTitle
+                        ? "text-xl sm:text-2xl font-normal text-[#6A2135] italic pb-1"
+                        : isPreSignature
+                        ? "text-sm sm:text-base font-normal text-[#6A2135] italic pt-3"
+                        : isSignature
+                        ? "text-base sm:text-lg font-bold text-[#6A2135] italic text-right mt-3"
+                        : isShortCallout
+                        ? "text-sm sm:text-base text-[#6A2135] italic font-medium pl-2"
+                        : p.startsWith('"Happy Birthday') || p.includes('Happy 14th Birthday')
+                        ? "text-sm sm:text-base text-[#6A2135] font-normal"
+                        : "text-xs sm:text-sm text-[#2D2A26]/85 font-light"
+                    }`}
+                  >
+                    {p}
+                  </motion.p>
+                );
+              })}
             </motion.div>
           )}
         </motion.div>

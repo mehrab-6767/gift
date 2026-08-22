@@ -242,10 +242,10 @@ export default function Future() {
               <motion.button
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                onClick={() => goTo(FLOW.VOICE_MESSAGE)}
+                onClick={() => goTo(FLOW.THANK_YOU)}
                 className="px-6 py-2.5 rounded-full bg-[#6A2135] text-[#FFFDF8] border border-[#D4AF37]/50 font-serif text-xs uppercase tracking-widest hover:bg-[#8b2b46] transition-all cursor-pointer shadow-lg"
               >
-                One Last Promise ✦
+                One Last Thing ✦
               </motion.button>
             )}
           </div>

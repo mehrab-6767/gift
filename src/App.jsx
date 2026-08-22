@@ -7,17 +7,17 @@ import LoadingScreen from "./components/LoadingScreen";
 
 const DEV_STAGE_OPTIONS = [
   { label: "Welcome", value: FLOW.WELCOME },
+  { label: "14 Candles", value: FLOW.CANDLES },
   { label: "Rotate Landscape", value: FLOW.ROTATE_LANDSCAPE },
   { label: "Memory Book", value: FLOW.MEMORY_BOOK },
   { label: "Rotate Portrait", value: FLOW.ROTATE_PORTRAIT },
   { label: "Gift Room", value: FLOW.GIFT_ROOM },
   { label: "Distance", value: FLOW.DISTANCE },
-  { label: "Forgiveness", value: FLOW.FORGIVENESS },
+
   { label: "Letter", value: FLOW.LETTER },
   { label: "Future", value: FLOW.FUTURE },
-  { label: "Voice Message", value: FLOW.VOICE_MESSAGE },
-  { label: "Ending", value: FLOW.ENDING },
   { label: "Thank You", value: FLOW.THANK_YOU },
+  { label: "Ending", value: FLOW.ENDING },
 ];
 
 function DevStageSwitcher() {

@@ -300,10 +300,10 @@ export default function Distance() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <button
-            onClick={() => goTo(FLOW.FORGIVENESS)}
+            onClick={() => goTo(FLOW.LETTER)}
             className="px-10 py-4 rounded-full bg-[#6A2135] text-[#FFFDF8] border border-[#D4AF37]/40 font-serif text-xs uppercase tracking-widest hover:bg-[#8b2b46] transition-all cursor-pointer shadow-xl"
           >
-            A Moment of Honesty ✦
+            Read My Letter ✦
           </button>
         </motion.div>
       </div>
